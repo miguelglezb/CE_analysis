@@ -1,5 +1,4 @@
 CE analysis - Analysis tool for common envelope simulations in Phantom
-
 =======================================================
 
 # CE_analysis
