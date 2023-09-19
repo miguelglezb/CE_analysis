@@ -4,4 +4,4 @@ test:
 	sh scripts/run_sep_test.sh
 
 install_modules:
-	pip freeze > requirements.txt
+	pip install -r requirements.txt
