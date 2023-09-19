@@ -10,6 +10,7 @@ from separation import sep_t
 from utils.rdumpfiles import read_dumpfiles
 from utils.vector_math import recentre_from_sink
 from utils.units import constants
+from utils.pformat import save_figure,plot_format
 
 def p_soft(q):
     '''
@@ -157,6 +158,7 @@ if __name__ == "__main__":
     dump_list = read_dumpfiles(path=path_dumpfiles)
     time, sink_potential = tot_potential(dump_list)
     plt.plot(time*yr, sink_potential*erg)
+    plot_format('yr', 'Bound mass [erg]',leg=False)
     plt.show()
     
 
