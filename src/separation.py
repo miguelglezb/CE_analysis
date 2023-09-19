@@ -7,6 +7,7 @@ from matplotlib import rc
 from matplotlib import rcParams
 import sarracen as sar
 from utils.rdumpfiles import read_dumpfiles
+import sys
 
 def sep_t(dumpfile_list,pfile=True):
     if type(dumpfile_list) == str:
@@ -31,7 +32,7 @@ def sep_t(dumpfile_list,pfile=True):
 
 
 if __name__ == "__main__":
-    path_dumpfiles = 'data/CE_example/'
+    path_dumpfiles = 'data/CE_example/' or sys.argv[1]
     dump_list = read_dumpfiles(path=path_dumpfiles)
     time, x_sep, y_sep, z_sep, r_sep = sep_t(dump_list)
     plt.plot(time, r_sep)
