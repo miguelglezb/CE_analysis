@@ -9,6 +9,7 @@ import sarracen as sar
 from separation import sep_t
 from utils.rdumpfiles import read_dumpfiles
 from utils.vector_math import recentre_from_sink
+from utils.units import constants
 
 def p_soft(q):
     '''
@@ -25,6 +26,7 @@ def p_soft(q):
     float, list, pandas.series (same type as q)
 
     '''
+    coefs = [105/32768, -11/256, 1925/8192, -165/256, 825/1024, -231/256, 165/128, -55/32]
     p_soft = 105.*np.power(q,10)/32768. - 11.*np.power(q,9)/256. + 1925.*np.power(q,8)/8192. 
     p_soft = p_soft - 165.*np.power(q,7)/256. + 825.*np.power(q,6)/1024. - 231.*np.power(q,4)/256. 
     p_soft = p_soft + 165.*np.power(q,2)/128. - 55./32.
@@ -149,9 +151,12 @@ def tot_potential_parts(dump):
 
 
 if __name__ == "__main__":
+    yr = constants.yr
+    erg = constants.ener
     path_dumpfiles = 'data/CE_example/'
     dump_list = read_dumpfiles(path=path_dumpfiles)
     time, sink_potential = tot_potential(dump_list)
-    plt.plot(time, sink_potential)
+    plt.plot(time*yr, sink_potential*erg)
     plt.show()
+    
 
