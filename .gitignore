@@ -1,5 +1,5 @@
 data/CE_example/binary_0*
 figs/*
 wget-log*
-src/__pycache__/*pyc
+src/__pycache__/separation.cpython-310.pyc
 src/utils/__pycache__/pyc*
