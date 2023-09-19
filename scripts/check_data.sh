@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 nfiles_CE_dir=`ls data/CE_example/binary_* | wc -l`
 CE_dir=data/CE_example
 
