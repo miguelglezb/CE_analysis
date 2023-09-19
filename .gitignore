@@ -1,7 +1,5 @@
 data/CE_example/binary_0*
 figs/*
 wget-log*
-src/__pycache__/*
-src/*pyc
-src/utils/__pycache__/*
-src/utils/*pyc
+src/__pycache__/*pyc
+src/utils/__pycache__/pyc*
