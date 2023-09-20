@@ -13,6 +13,8 @@ from utils.vector_math import recentre_from_sink
 from utils.units import constants
 from utils.pformat import save_figure, plot_format
 import utils.save_test_figs as stf
+
+
 def p_soft(q):
     '''
     M-4 kernel for modified potential close to sink particle        
@@ -152,14 +154,16 @@ def total_mechanical(kinetic_energy, potential_energy):
 if __name__ == "__main__":
     yr = constants.yr
     erg = constants.ener
-    path_dumpfiles = 'data/CE_example/' or sys.argv[1]
-    path_save = './' or sys.argv[1] or sys.argv[2] 
+    path_dumpfiles, path_save = './data/CE_example/', './'    
+    if len(sys.argv) > 1:
+        path_dumpfiles = sys.argv[1] + '/'
+        path_save = sys.argv[-1] + '/'
     dump_list = read_dumpfiles(path=path_dumpfiles)
     time, kin_energy = tot_kinetic(dump_list, progress=True)
     time, pot_energy = tot_potential(dump_list, progress=True)
     mech_energy = total_mechanical(kin_energy,pot_energy)
     plt.plot(time*yr, mech_energy*erg*1E-46)
-    plot_format('yr', 'Mechanical energy [erg/$10^{46}$]',leg=False)
+    plot_format('time [yr]', 'Mechanical energy [erg/$10^{46}$]',leg=False)
     stf.make_fig_dir(path_save)
     save_figure(path_save + 'figs/mech_ener.pdf')
     
