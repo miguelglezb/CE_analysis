@@ -27,7 +27,7 @@ def read_dumpfiles(files_sufix='binary_', path='./'):
     os.system('ls ' + path + files_sufix + '* > listfiles.txt')
     openlist = open('listfiles.txt')
     list_dumpfiles = openlist.read().splitlines() 
-    list_dumpfiles = [namefile.strip('.divv') for namefile in list_dumpfiles]
+    list_dumpfiles = [namefile.rstrip('.divv') for namefile in list_dumpfiles]
     list_dumpfiles = list(unique(list_dumpfiles))
     openlist.close()
     os.system('rm listfiles.txt')          
