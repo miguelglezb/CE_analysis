@@ -42,7 +42,9 @@ def sink_gas_potential(m_sink,h_isoft,r):
 
     Parameter 
     ----------
-    m_sink : mass of sink particle 
+    m_sink : float, mass of sink particle 
+    h_isoft : float, softening length of sink particle
+    r : ndarray, distance from sink to each SPH (gas) particle
     
     Returns
     -------
@@ -113,6 +115,7 @@ def tot_kinetic(dumpfile_list, progress=False):
     progress : boolean, default=False   
         if True, prints the name of file that is using from the simulation for 
         the kinetic energy calculation.
+
     Returns
     -------
     Two arrays of floats with time and total kinetic energies.
@@ -136,6 +139,17 @@ def tot_kinetic(dumpfile_list, progress=False):
 
 
 def tot_kinetic_gas(dump):
+    '''
+    Calculation of total kinetic energy of the gas for a single dumpfile
+    
+    Parameters
+    ----------
+    dump : str, name (path included) of the dumpfile
+
+    Returns
+    -------
+    Two arrays of floats with time and gas kinetic energy.
+    '''
     sdf, sdf_sinks = sar.read_phantom(dump)
     particlemass = sdf.params['mass']
     v2_gas = sdf['vx']**2 + sdf['vy']**2 + sdf['vz']**2
@@ -145,7 +159,20 @@ def tot_kinetic_gas(dump):
 
 
 def total_mechanical(kinetic_energy, potential_energy):
-    total_mech = kinetic_energy +  potential_energy
+    '''
+    Adds total kinetic and total mechanic energies from the gas
+        
+    Parameters
+    ----------
+    kinetic_energy : float, kinetic energy of the gas 
+    potential_energy : float, potential energy of the gas 
+
+    
+    Returns
+    -------
+    float, total mechanical energy of the gas
+    '''
+    total_mech = kinetic_energy + potential_energy
     return total_mech
 
 
