@@ -11,8 +11,8 @@ from separation import sep_t
 from utils.rdumpfiles import read_dumpfiles
 from utils.vector_math import recentre_from_sink
 from utils.units import constants
-from utils.pformat import save_figure,plot_format
-
+from utils.pformat import save_figure, plot_format
+import utils.save_test_figs as stf
 def p_soft(q):
     '''
     M-4 kernel for modified potential close to sink particle        
@@ -146,16 +146,21 @@ def total_mechanical(kinetic_energy, potential_energy):
     total_mech = kinetic_energy +  potential_energy
     return total_mech
 
+
+# __main__ uses the simulation in data/CE_example or from another path (if specified).
+# It plots total mechanical of simulation vs time.   
 if __name__ == "__main__":
     yr = constants.yr
     erg = constants.ener
     path_dumpfiles = 'data/CE_example/' or sys.argv[1]
+    path_save = './' or sys.argv[1] or sys.argv[2] 
     dump_list = read_dumpfiles(path=path_dumpfiles)
     time, kin_energy = tot_kinetic(dump_list, progress=True)
     time, pot_energy = tot_potential(dump_list, progress=True)
     mech_energy = total_mechanical(kin_energy,pot_energy)
     plt.plot(time*yr, mech_energy*erg*1E-46)
-    plot_format('yr', 'Bound mass [erg/$10^{46}$]',leg=False)
-    plt.show()
+    plot_format('yr', 'Mechanical energy [erg/$10^{46}$]',leg=False)
+    stf.make_fig_dir(path_save)
+    save_figure(path_save + 'figs/mech_ener.pdf')
     
 
