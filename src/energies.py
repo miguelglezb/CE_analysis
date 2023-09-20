@@ -3,9 +3,10 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+import sarracen as sar
+import sys
 from matplotlib import rc
 from matplotlib import rcParams
-import sarracen as sar
 from separation import sep_t
 from utils.rdumpfiles import read_dumpfiles
 from utils.vector_math import recentre_from_sink
@@ -126,7 +127,7 @@ def tot_kinetic(dumpfile_list):
     return time, kinetic
 
 
-def tot_kinetic_parts(dump):
+def tot_kinetic_gas(dump):
     sdf, sdf_sinks = sar.read_phantom(dump)
     particlemass = sdf.params['mass']
     v2_gas = sdf['vx']**2 + sdf['vy']**2 + sdf['vz']**2
@@ -154,11 +155,11 @@ def tot_potential_parts(dump):
 if __name__ == "__main__":
     yr = constants.yr
     erg = constants.ener
-    path_dumpfiles = 'data/CE_example/'
+    path_dumpfiles = 'data/CE_example/' or sys.argv[1]
     dump_list = read_dumpfiles(path=path_dumpfiles)
     time, sink_potential = tot_potential(dump_list)
-    plt.plot(time*yr, sink_potential*erg)
-    plot_format('yr', 'Bound mass [erg]',leg=False)
+    plt.plot(time*yr, sink_potential*erg*1E-46)
+    plot_format('yr', 'Bound mass [erg/10^{46}]',leg=False)
     plt.show()
     
 
