@@ -14,7 +14,13 @@ then
     wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=11O2F2MRESjQEGmkvlcxufhOc3WIHOzDk' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=11O2F2MRESjQEGmkvlcxufhOc3WIHOzDk" -O data/CE_example.zip && rm -rf /tmp/cookies.txt
     unzip data/CE_example.zip -d data/
     rm data/CE_example.zip
-    rm wget-log*
+    if [ -f 'wget-log*' ]; then
+        rm wget-log*
+    fi
 else
     echo "\n $CE_dir seems to have the right dumpfiles\n"
 fi
+
+    if [ -d 'wget-log*' ]; then
+        rm wget-log*
+    fi
