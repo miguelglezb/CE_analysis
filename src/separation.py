@@ -12,7 +12,7 @@ from utils.units import constants
 from utils.pformat import save_figure, plot_format
 import utils.save_test_figs as stf
 
-def sep_t(dumpfile_list,pfile=True):
+def sep_t(dumpfile_list, progress=False):
     if type(dumpfile_list) == str:
         dumpfile_list = [dumpfile_list]  
     time = np.array([])
@@ -28,8 +28,8 @@ def sep_t(dumpfile_list,pfile=True):
         x_sep, y_sep, z_sep = np.append(x_sep,x_sinks) , np.array(y_sep,y_sinks), np.array(z_sep,z_sinks)
         r_sep = np.append(r_sep,r)
         time = np.append(time,sdf.params['time'])
-        if pfile == True:
-            print('file: ',file_name)
+        if progress == True:
+            print('Orbital separation calculation of file: ',file_name)
     
     return time, x_sep, y_sep, z_sep, r_sep
 
@@ -41,7 +41,7 @@ if __name__ == "__main__":
         path_dumpfiles = sys.argv[1] + '/'
         path_save = sys.argv[-1] + '/'    
     dump_list = read_dumpfiles(path=path_dumpfiles)
-    time, x_sep, y_sep, z_sep, r_sep = sep_t(dump_list)
+    time, x_sep, y_sep, z_sep, r_sep = sep_t(dump_list,progress=True)
     plt.plot(time*yr,r_sep)
     plot_format('time [yr]', 'Orbital separation [$R_{\odot}$]',leg=False)
     stf.make_fig_dir(path_save)
