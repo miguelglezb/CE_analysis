@@ -28,11 +28,11 @@ def p_soft(q):
     float, list, pandas.series (same type as q)
 
     '''
-    coefs = [105/32768, -11/256, 1925/8192, -165/256, 825/1024, -231/256, 165/128, -55/32]
-    p_soft = 105.*np.power(q,10)/32768. - 11.*np.power(q,9)/256. + 1925.*np.power(q,8)/8192. 
-    p_soft = p_soft - 165.*np.power(q,7)/256. + 825.*np.power(q,6)/1024. - 231.*np.power(q,4)/256. 
-    p_soft = p_soft + 165.*np.power(q,2)/128. - 55./32.
-    return p_soft
+    coefs = np.array([105/32768, -11/256, 1925/8192, -165/256, 825/1024, -231/256, 165/128, -55/32])
+    p_soft = np.array([np.power(q,10), np.power(q,9), np.power(q,8), np.power(q,7), np.power(q,6),
+              np.power(q,4), np.power(q,2), 1],dtype=object)
+    pot_soft = np.sum(coefs*p_soft)
+    return pot_soft
 
 def sink_gas_potential(m_sink,h_isoft,r):
     '''
@@ -159,7 +159,7 @@ if __name__ == "__main__":
     dump_list = read_dumpfiles(path=path_dumpfiles)
     time, sink_potential = tot_potential(dump_list)
     plt.plot(time*yr, sink_potential*erg*1E-46)
-    plot_format('yr', 'Bound mass [erg/10^{46}]',leg=False)
+    plot_format('yr', 'Bound mass [erg/$10^{46}$]',leg=False)
     plt.show()
     
 
