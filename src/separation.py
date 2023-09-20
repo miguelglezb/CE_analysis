@@ -6,8 +6,11 @@ import numpy as np
 from matplotlib import rc
 from matplotlib import rcParams
 import sarracen as sar
-from utils.rdumpfiles import read_dumpfiles
 import sys
+from utils.rdumpfiles import read_dumpfiles
+from utils.units import constants
+from utils.pformat import save_figure, plot_format
+import utils.save_test_figs as stf
 
 def sep_t(dumpfile_list,pfile=True):
     if type(dumpfile_list) == str:
@@ -32,8 +35,14 @@ def sep_t(dumpfile_list,pfile=True):
 
 
 if __name__ == "__main__":
-    path_dumpfiles = 'data/CE_example/' or sys.argv[1]
+    yr = constants.yr
+    path_dumpfiles, path_save = './data/CE_example/', './'    
+    if len(sys.argv) > 1:
+        path_dumpfiles = sys.argv[1] + '/'
+        path_save = sys.argv[-1] + '/'    
     dump_list = read_dumpfiles(path=path_dumpfiles)
     time, x_sep, y_sep, z_sep, r_sep = sep_t(dump_list)
-    plt.plot(time, r_sep)
-    plt.show()
+    plt.plot(time*yr,r_sep)
+    plot_format('time [yr]', 'Orbital separation [$R_{\odot}$]',leg=False)
+    stf.make_fig_dir(path_save)
+    save_figure(path_save + 'figs/separation.pdf')
