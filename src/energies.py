@@ -54,7 +54,7 @@ def sink_gas_potential(m_sink,h_isoft,r):
 
 # Calculation of gravitational potential energy for the entire envelope 
 # (assuming 2 sink particles and )
-def tot_potential(dumpfile_list):
+def tot_potential(dumpfile_list, progress=False):
     '''
     Calculation of total gravitational potential energy in the common envelope,
     including sink-sink, sink-gas and gas-gas potential over time.    
@@ -62,7 +62,10 @@ def tot_potential(dumpfile_list):
     Parameter 
     ----------
     dumpfile_list : list
-       list of paths of the dumpfiles of the simulation 
+        list of paths of the dumpfiles of the simulation 
+    progress : boolean, default=False   
+        if True, prints the name of file that is using from the simulation for 
+        the kinetic energy calculation.
 
     Returns
     -------
@@ -90,12 +93,13 @@ def tot_potential(dumpfile_list):
         pot_bet_sinks = -(sdf_sinks['m'][0]*sdf_sinks['m'][1])/r_sinks
         tot_pot = particlemass*(phi1 + phi2) + sdf['poten'].sum() + pot_bet_sinks
         potential = np.append(potential, tot_pot)
- 
         time = np.append(time,sdf.params['time'])
-        print('file: ',file_name)
+        if progress == True:
+            print('Potential energy calculation of file: ',file_name)
     return time, potential
 
-def tot_kinetic(dumpfile_list):
+
+def tot_kinetic(dumpfile_list, progress=False):
     '''
     Calculation of total kinetic energy in the common envelope, including 
     sink-sink, sink-gas and gas-gas potential over time        
@@ -104,7 +108,9 @@ def tot_kinetic(dumpfile_list):
     ----------
     dumpfile_list : list
        list of paths of the dumpfiles of the simulation 
-
+    progress : boolean, default=False   
+        if True, prints the name of file that is using from the simulation for 
+        the kinetic energy calculation.
     Returns
     -------
     Two arrays of floats with time and total kinetic energies.
@@ -121,9 +127,9 @@ def tot_kinetic(dumpfile_list):
         v2_gas = np.sum(sdf['vx']**2 + sdf['vy']**2 + sdf['vz']**2)
         kin = 0.5*(particlemass*v2_gas + sdf_sinks['m'][0]*v2_sink1 + sdf_sinks['m'][1]*v2_sink2)
         kinetic = np.append(kinetic, kin)
-
         time = np.append(time,sdf.params['time'])
-        print('file: ',file_name)
+        if progress == True:
+            print('Kinetic energy calculation of file: ',file_name)
     return time, kinetic
 
 
@@ -135,30 +141,20 @@ def tot_kinetic_gas(dump):
     time = sdf.params['time']
     return time, kin
 
-def tot_potential_parts(dump):
-    sdf, sdf_sinks = sar.read_phantom(dump)
-    particlemass = sdf.params['mass']
-    [x1, y1, z1] = recentre_from_sink(sdf,sdf_sinks,sink=0)
-    [x2, y2, z2] = recentre_from_sink(sdf,sdf_sinks,sink=1)
-    r1 = np.sqrt(np.square(x1) + np.square(y1) + np.square(z1))
-    r2 = np.sqrt(np.square(x2) + np.square(y2) + np.square(z2))
-    sdf['hs1'] = sdf['h'].where(sdf['h'] > sdf_sinks['hsoft'][0], sdf_sinks['hsoft'][0])
-    sdf['hs2'] = sdf['h'].where(sdf['h'] > sdf_sinks['hsoft'][1], sdf_sinks['hsoft'][1])
-    phi1 = sink_gas_potential(sdf_sinks['m'][0],sdf['hs1'],r1)
-    phi2 = sink_gas_potential(sdf_sinks['m'][1],sdf['hs2'],r2)
-    pot = particlemass*(phi1 + phi2) + sdf['poten'] 
-    time = sdf.params['time']
-    return time, pot
 
-
+def total_mechanical(kinetic_energy, potential_energy):
+    total_mech = kinetic_energy +  potential_energy
+    return total_mech
 
 if __name__ == "__main__":
     yr = constants.yr
     erg = constants.ener
     path_dumpfiles = 'data/CE_example/' or sys.argv[1]
     dump_list = read_dumpfiles(path=path_dumpfiles)
-    time, sink_potential = tot_potential(dump_list)
-    plt.plot(time*yr, sink_potential*erg*1E-46)
+    time, kin_energy = tot_kinetic(dump_list, progress=True)
+    time, pot_energy = tot_potential(dump_list, progress=True)
+    mech_energy = total_mechanical(kin_energy,pot_energy)
+    plt.plot(time*yr, mech_energy*erg*1E-46)
     plot_format('yr', 'Bound mass [erg/$10^{46}$]',leg=False)
     plt.show()
     
