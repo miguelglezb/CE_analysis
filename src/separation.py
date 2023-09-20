@@ -13,6 +13,18 @@ from utils.pformat import save_figure, plot_format
 import utils.save_test_figs as stf
 
 def sep_t(dumpfile_list, progress=False):
+    '''Calculates the separation of the sink particles in x,y and z axis. 
+    It also calculates the total separation between them
+    Parameter 
+    ----------
+    dumpfile_list : list of paths of the dumpfiles of the simulation 
+    progress : boolean, default=False   
+    if True, prints the name of file that is using from the simulation for the kinetic energy calculation.
+
+    Returns
+    -------
+    Five arrays of floats with time and x,y,z and total orbital separations.
+    '''
     if type(dumpfile_list) == str:
         dumpfile_list = [dumpfile_list]  
     time = np.array([])
