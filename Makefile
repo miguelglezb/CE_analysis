@@ -1,5 +1,4 @@
 test:
-	pip install -r requirements.txt
 	sh scripts/check_data.sh
 	sh scripts/run_energies_test.sh  
 	sh scripts/run_sep_test.sh
@@ -7,3 +6,4 @@ test:
 
 install_modules:
 	pip install -r requirements.txt
+	sh scripts/install_font_dependencies.sh 
