@@ -8,3 +8,4 @@ test:
 
 clean:
 	rm figs/*
+	sh scripts/uninstall_font_dependencies.sh 
