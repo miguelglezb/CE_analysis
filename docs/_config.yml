@@ -1,0 +1,10 @@
+# basic options
+title: Miguel Gonzalez-Bolívar
+author: Miguel Gonzalez-Bolivar
+email: miguel-angel.gonzalez-boliv@mq.edu.au
+description: PhD student at Macquarie University 
+github_username:  miguelglezb
+
+# Build settings
+markdown: kramdown
+theme: jekyll-theme-midnight
