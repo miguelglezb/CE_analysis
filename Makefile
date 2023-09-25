@@ -7,5 +7,5 @@ test:
 	sh scripts/check_test.sh
 
 clean:
-	rm figs/*
 	sh scripts/uninstall_font_dependencies.sh 
+	rm figs/*
