@@ -5,7 +5,7 @@
 ``sink_gas_potential(m_sink,h_isoft,r):``
 
     
-    Grav. potential function (both newtonian and modified adapted for pandas series)    
+    Gravity potential function (both newtonian and modified adapted for pandas series)    
 
     Parameter 
     ----------
