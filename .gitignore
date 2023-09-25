@@ -5,3 +5,5 @@ src/__pycache__/separation.cpython-310.pyc
 src/__pycache__/*pyc
 src/utils/__pycache__/*.pyc
 docs/.obsidian/*.json
+.obsidian/*.json
+Untitled.canvas
