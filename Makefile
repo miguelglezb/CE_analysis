@@ -1,5 +1,5 @@
 test:
-	pip install -r requirements.txt
+	sh scripts/check_pip.sh
 	sh scripts/install_font_dependencies.sh 
 	sh scripts/check_data.sh
 	sh scripts/run_energies_test.sh  
