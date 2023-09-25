@@ -9,6 +9,7 @@ test:
 	sh scripts/check_test.sh
 
 clean:
-	sh scripts/uninstall_font_dependencies.sh 
 	rm figs/*
 
+uninstall_latex_dependencies:
+	sh scripts/uninstall_latex_dependencies.sh
