@@ -4,7 +4,7 @@
 
 [Separation](../src/separation.py) module calculates orbital separation of the sink particles for each moment in the simulation 
 
-``sep_t(dumpfile_list, progress=False)``
+`sep_t(dumpfile_list, progress=False)`
 
     Calculates the separation of the sink particles in x,y and z axis. 
     It also calculates the total separation between them
@@ -23,7 +23,7 @@
 
 [Energies](../src/energies.py) module calculates several types of energies of the CE simulation. With a few exceptions, it will also save the time (in *Phantom* units) of the simulation at that moment.  
 
-``sink_gas_potential(m_sink,h_isoft,r):``
+`sink_gas_potential(m_sink,h_isoft,r):`
 
     
     Gravity potential function (both newtonian and modified adapted for pandas series)    
@@ -39,7 +39,7 @@
     float, list, pandas.series (same type as q)
     
 
-``p_soft(q)``
+`p_soft(q)`
 
     M-4 kernel for modified potential close to sink particle        
     
@@ -53,7 +53,7 @@
     -------
     float, list, pandas.series (same type as q)
 
-``tot_potential(dumpfile_list, progress=False)``
+`tot_potential(dumpfile_list, progress=False)`
 
     Calculation of total gravitational potential energy in the common envelope,
     including sink-sink, sink-gas and gas-gas potential over time.    
@@ -70,7 +70,7 @@
     Two arrays of floats with time and total potential energies.
 
 
-``tot_kinetic(dumpfile_list, progress=False)``
+`tot_kinetic(dumpfile_list, progress=False)`
 
     Calculation of total kinetic energy in the common envelope, including 
     sink-sink, sink-gas and gas-gas potential over time        
@@ -85,7 +85,7 @@
     -------
     Two arrays of floats with time and total kinetic energies.
 
-``tot_kinetic_gas(dump)``
+`tot_kinetic_gas(dump)`
 
     Calculation of total kinetic energy of the gas for a single dumpfile
     
@@ -97,7 +97,7 @@
     -------
     Two arrays of floats with time and gas kinetic energy.
 
-``total_mechanical(kinetic_energy, potential_energy)``
+`total_mechanical(kinetic_energy, potential_energy)`
 
     Adds total kinetic and total mechanic energies from the gas
         
