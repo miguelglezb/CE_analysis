@@ -7,4 +7,4 @@ github_username:  miguelglezb
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-midnight
+theme: jekyll-text-theme
