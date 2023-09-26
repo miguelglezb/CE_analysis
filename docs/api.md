@@ -2,7 +2,7 @@
 
 ## Separation module   
 
-[Separation](../src/separation.py) module calculates orbital separation of the sink particles for each moment in the simulation 
+Calculates orbital separation of the sink particles for each moment in the simulation 
 
 `sep_t(dumpfile_list, progress=False)`
 
@@ -21,7 +21,7 @@
 
 ## Energies module   
 
-[Energies](../src/energies.py) module calculates several types of energies of the CE simulation. With a few exceptions, it will also save the time (in *Phantom* units) of the simulation at that moment.  
+Calculates several types of energies of the CE simulation. With a few exceptions, it will also save the time (in *Phantom* units) of the simulation at that moment.  
 
 `sink_gas_potential(m_sink,h_isoft,r):`
 
