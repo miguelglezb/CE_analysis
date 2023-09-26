@@ -26,27 +26,27 @@ Installation of additional packages and modules used by CE_analysis is done by t
 
 This will install the following Python modules:
 
--matplotlib 
+-``matplotlib``  
 
--numba
+-``numba``
 
--pandas
+-``pandas``
 
--scipy
+-``scipy``
 
--seaborn
+-``seaborn``
 
--sarracen
+-``sarracen``
  
 It will also install the latex font (and extra) packages:
 
--exlive-extra-utils 
+-``exlive-extra-utils`` 
 
--cm-super 
+-``cm-super`` 
 
--texlive-latex-extra 
+-``texlive-latex-extra`` 
 
--dvipng
+-``dvipng``
 
 ## Test
 
