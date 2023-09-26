@@ -19,3 +19,4 @@ if [ -f "$sep_file" ] && [ -f "$mech_ener_file" ]; then
     echo '\n Test passed!!!' 
 fi
 
+cat extras/CE_logo.txt
