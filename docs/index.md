@@ -1,14 +1,14 @@
 
 
-Physics PhD student - Macquarie University
+CE analysis - Analysis tool for common envelope simulations in Phantom
+=======================================================
 
-### Astrophysics <code>&#124;</code> Hydrodynamical simulations <code>&#124;</code> Stellar collisions
+About
+-----
+CE analysis is a free and open source tool to generate simple analysis of common envelope simulations generated in the hydro 3D code [Phantom](https://ui.adsabs.harvard.edu/abs/2018PASA...35...31P/abstract) created by Daniel J Price. 
 
-<p style="text-align: justify">I'm a 3rd year PhD student on Macquarie University located on Sydney, Australia. My research is on a particular phase in stellar binary systems called common envelope (CE).</p>
+Data is read *directly* from the snapshots files (written in binary and with Big Endian format) using the Python3 module [sarracen](https://github.com/ttricco/sarracen/) to create plots of global quantities, such as orbital separation and porcentage of ejected envelope.    
 
+CE analysis uses the SPH smoothing kernel to calculate physical quantities, giving a proper representation of the data. The goal is to produce nice plots and visualisations from the SPH output. 
 
-<p style="text-align: justify">This phase occurs when one of the components in the binary expands or, due to another process, overflows its Roche lobe (its gravitational dominant region). By this point, it is most likely that the primary gas is already being transferred, for the most part, to the companion at a stable rate. Once certain threshold is reached, the mass transfer becomes unstable and the CE phase begins. The primary gas engulf both components and the orbit shriks due to the angular momentum transfer to the gas. Recently, I have worked on implementing dust driven acceleration in CE using the Bowen model.</p> 
-
-
-<p style="text-align: justify">The outcome of these interactions are of great interest for astronomers, since they may explain the existence of objects such as assymetric planetary nebulae or gravitational waves sources.</p>
-
+CE analysis also generates ascii files corresponding to the created plots.
