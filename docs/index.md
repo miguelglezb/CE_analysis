@@ -19,4 +19,4 @@ CE analysis also generates ascii files corresponding to the created plots.
 
 -[User guide](./user_guide.md)
 
--[API](./api.md)
+-[API Reference](./api.md)
