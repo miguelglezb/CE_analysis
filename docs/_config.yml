@@ -1,19 +1,3 @@
-# basic options
-title: Miguel Gonzalez-Bolívar
-author: Miguel Gonzalez-Bolivar
-email: miguel-angel.gonzalez-boliv@mq.edu.au
-description: PhD student at Macquarie University 
-github_username:  miguelglezb
-
-
-fonts:
-  google_fonts: "https://fonts.googleapis.com/css2?family=Fira+Mono&family=Lato:wght@300;400;700&family=Source+Sans+Pro&display=swap"
-  heading: "Lato"
-  base: "Source Sans Pro"
-  monospace: "Fira Mono"
-  title: "Fira Mono"
-
-# Build settings
-remote_theme: pages-themes/architect@v0.2.0
+remote_theme: pages-themes/cayman@v0.2.0
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
