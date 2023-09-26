@@ -11,6 +11,8 @@ CE analysis uses the SPH smoothing kernel to calculate physical quantities, givi
 
 CE analysis also generates ascii files corresponding to the created plots.
 
+More information can be found in CE_analysis [documentation](https://miguelglezb.github.io/CE_analysis/) page
+
 # Installation
 
 In the terminal, from the CE_analysis main directory, type:
