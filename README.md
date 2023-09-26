@@ -17,7 +17,7 @@ More information can be found in CE_analysis [documentation](https://miguelglezb
 
 In the terminal, from the CE_analysis main directory, type:
 
-``` sudo make install```
+```sudo make install```
 
 to install all python required modules and latex fonts for the plots
 
