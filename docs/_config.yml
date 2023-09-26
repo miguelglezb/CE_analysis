@@ -11,7 +11,7 @@ fonts:
   heading: "Lato"
   base: "Source Sans Pro"
   monospace: "Fira Mono"
-
+  title: "Fira Mono"
 
 # Build settings
 remote_theme: pages-themes/architect@v0.2.0

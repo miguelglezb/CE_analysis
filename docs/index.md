@@ -12,3 +12,4 @@ Data is read *directly* from the snapshots files (written in binary and with Big
 CE analysis uses the SPH smoothing kernel to calculate physical quantities, giving a proper representation of the data. The goal is to produce nice plots and visualisations from the SPH output. 
 
 CE analysis also generates ascii files corresponding to the created plots.
+
