@@ -1,5 +1,7 @@
 # API
 
+### [Home](./index.md)
+
 ## Separation module   
 
 Calculates orbital separation of the sink particles for each moment in the simulation 

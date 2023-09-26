@@ -1,5 +1,7 @@
 # Getting started
 
+### [Home](./index.md)
+
 Since this code is written in Python, the usage is almost straightforward. For now, it is only fully functional in linux (debian) OS. We plan to add mac SO in the near future.
 
 ## Pre-requisites
