@@ -6,7 +6,7 @@ Since this code is written in Python, the usage is almost straightforward. For n
 
 ## Pre-requisites
 
-This code is written in Python 3, therefore it is required to have it installed. Additionally, some latex font packages are required to use the code. The complete disk size of these packages is ~150 MB. 
+This code is written in Python 3, therefore it is required to have it installed. Additionally, some latex font packages are required to use the code. The complete disk size of these packages is ~200 MB. 
 
 ## Download
 
