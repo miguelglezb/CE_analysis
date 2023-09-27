@@ -12,4 +12,4 @@ clean:
 	rm figs/*
 
 uninstall_latex_dependencies:
-	sh scripts/uninstall_latex_dependencies.sh
+	sh scripts/uninstall_font_dependencies.sh
