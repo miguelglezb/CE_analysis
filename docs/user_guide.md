@@ -14,3 +14,5 @@ Type:
 ```python3 src/separation.py CE_DIR CE_figs``` 
 
 to create the separation plots. If `CE_figs` is not given, the plots will be saved in `CE_DIR/figs/`
+
+**Warning:** dumpfiles must be named with the prefix `binary_`. That is, `CE_figs` must contain `binary_00000`, `binary_00001`, etc. Future versions will allow for customizable naming conventions
