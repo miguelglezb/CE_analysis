@@ -4,7 +4,7 @@
 import os
 from pandas import unique
 
-def read_dumpfiles(files_sufix='binary_', path='./'):
+def read_dumpfiles(files_sufix='binary_', path='./',evy_files=-1):
     '''
     Creates a list of the dumpfiles that will be used in the analysis.
         
@@ -31,5 +31,9 @@ def read_dumpfiles(files_sufix='binary_', path='./'):
     list_dumpfiles = list(unique(list_dumpfiles))
     openlist.close()
     os.system('rm listfiles.txt')          
-    return list_dumpfiles
-
+    if evy_files == -1:
+        return list_dumpfiles
+    elif evy_files > 0:
+        return list_dumpfiles[::evy_files]
+    else:
+        print("Error: Invalid value for evy_file")
