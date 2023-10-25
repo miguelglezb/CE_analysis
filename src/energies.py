@@ -57,7 +57,7 @@ def sink_gas_potential(m_sink,h_isoft,r):
     return pot
 
 # Calculation of gravitational potential energy for the entire envelope 
-# (assuming 2 sink particles and )
+# (assuming 2 sink particles and envelope)
 def tot_potential(dumpfile_list, progress=False):
     '''
     Calculation of total gravitational potential energy in the common envelope,
@@ -174,6 +174,33 @@ def total_mechanical(kinetic_energy, potential_energy):
     '''
     total_mech = kinetic_energy + potential_energy
     return total_mech
+
+
+def potential_parts(dump, rtrack = False):
+    sdf, sdf_sinks = sar.read_phantom(dump)
+    particlemass = sdf.params['mass']
+    [x1, y1, z1] = recentre_from_sink(sdf,sdf_sinks,sink=0)
+    [x2, y2, z2] = recentre_from_sink(sdf,sdf_sinks,sink=1)
+    r1 = np.sqrt(np.square(x1) + np.square(y1) + np.square(z1))
+    r2 = np.sqrt(np.square(x2) + np.square(y2) + np.square(z2))
+    sdf['hs1'] = sdf['h'].where(sdf['h'] > sdf_sinks['hsoft'][0], sdf_sinks['hsoft'][0])
+    sdf['hs2'] = sdf['h'].where(sdf['h'] > sdf_sinks['hsoft'][1], sdf_sinks['hsoft'][1])
+    phi1 = sink_gas_potential(sdf_sinks['m'][0],sdf['hs1'],r1)
+    phi2 = sink_gas_potential(sdf_sinks['m'][1],sdf['hs2'],r2)
+    pot_parts = particlemass*(phi1 + phi2) + 2*sdf['poten'] 
+    time = sdf.params['time']
+    if rtrack == True:
+        return time, r1, pot_parts
+    else:
+        return time, pot_parts
+
+def kinetic_parts(dump):
+    sdf, sdf_sinks = sar.read_phantom(dump)
+    particlemass = sdf.params['mass']
+    sdf['v2_gas'] = sdf['vx']**2 + sdf['vy']**2 + sdf['vz']**2
+    kin = 0.5*particlemass*sdf['v2_gas']
+    time = sdf.params['time']
+    return time, kin
 
 
 # __main__ uses the simulation in data/CE_example or from another path (if specified).
