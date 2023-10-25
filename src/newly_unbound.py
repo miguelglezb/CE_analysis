@@ -14,7 +14,7 @@ from utils.units import constants
 from utils.pformat import save_figure, plot_format
 import utils.save_test_figs as stf
 from energies import potential_parts, kinetic_parts
-import dataread as dr
+import utils.dataread as dr
 import seaborn as sns
 from tqdm import tqdm  
 
@@ -49,6 +49,7 @@ if __name__ == "__main__":
     fig, ax = plt.subplots()
     ax.plot(ph_data['time']*yr, np.log10(ph_data['sep. 1'])) 
     sns.histplot(x=time_newly_unb,y=logR_newly_unb, ax=ax,color='r')
+    ax.grid()
     #H, yedges, xedges = np.histogram2d(logR_newly_unb,time_newly_unb,bins=200)
     #plt.pcolormesh(xedges, yedges, H+1, cmap='Reds')
     plt.show()
