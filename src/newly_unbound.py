@@ -57,4 +57,5 @@ if __name__ == "__main__":
     print(nbins)
     sns.histplot(x=time_newly_unb,y=logR_newly_unb, ax=ax,color='r',bins=nbins)
     ax.grid()
+    plot_format('time [yr]', 'R$_{\odot}$', leg=False)
     save_figure(path_dumpfiles + '/newly_unb.pdf')
