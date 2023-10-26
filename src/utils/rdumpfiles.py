@@ -31,9 +31,9 @@ def read_dumpfiles(files_sufix='binary_', path='./',evy_files=-1):
     list_dumpfiles = list(unique(list_dumpfiles))
     openlist.close()
     os.system('rm listfiles.txt')          
-    if evy_files == -1:
+    if (evy_files == -1) or (evy_files ==  None):
         return list_dumpfiles
     elif evy_files > 0:
         return list_dumpfiles[::evy_files]
     else:
-        print("Error: Invalid value for evy_file")
+        print("Invalid option for evy_files.")

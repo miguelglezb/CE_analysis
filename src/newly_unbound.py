@@ -5,18 +5,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sarracen as sar
 import sys
-from matplotlib import rc
-from matplotlib import rcParams
 from separation import sep_t
 from utils.rdumpfiles import read_dumpfiles
-from utils.vector_math import recentre_from_sink
 from utils.units import constants
 from utils.pformat import save_figure, plot_format
-import utils.save_test_figs as stf
 from energies import potential_parts, kinetic_parts
 import utils.dataread as dr
 import seaborn as sns
 from tqdm import tqdm  
+from cli_args_system import Args
 
 def unbound_mech_kipp(dumpfile_list):
     time, R = np.array([]), np.array([])
@@ -39,13 +36,21 @@ def unbound_mech_kipp(dumpfile_list):
 if __name__ == "__main__":
     yr = constants.yr
     erg = constants.ener
-    path_dumpfiles, path_save = './data/CE_example/', './'    
-    if len(sys.argv) > 1:
-        path_dumpfiles = sys.argv[1] + '/'
-        path_save = sys.argv[-1] + '/'
-    dump_list = read_dumpfiles(path=path_dumpfiles)
+    args = Args(convert_numbers=True)
+    evy_file = args.flag_str('evy','evy_file')
+    path_save = args.flag_str('s','save')
+    path_dumpfiles = './data/CE_example/'   
+
+    if len(sys.argv) > 2:
+        if sys.argv[1][0] != '-':
+            path_dumpfiles = sys.argv[1]
+        if path_save == None:
+            path_save = path_dumpfiles
+    dump_list = read_dumpfiles(path=path_dumpfiles,evy_files=evy_file)
+
     time_newly_unb, logR_newly_unb = unbound_mech_kipp(dump_list)
     ph_data = dr.phantom_evdata(path_dumpfiles + '/separation_vs_time.ev',pheaders=False)
+    
     fig, ax = plt.subplots()
     ax.plot(ph_data['time']*yr, np.log10(ph_data['sep. 1'])) 
     nbins = min([int(len(dump_list)/2),1000])
