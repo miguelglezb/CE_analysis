@@ -53,7 +53,7 @@ if __name__ == "__main__":
     
     fig, ax = plt.subplots()
     ax.plot(ph_data['time']*yr, np.log10(ph_data['sep. 1'])) 
-    nbins = min([int(len(dump_list)/2),500])
+    nbins = min([int(len(dump_list)),500])
     print(nbins)
     sns.histplot(x=time_newly_unb,y=logR_newly_unb, ax=ax,color='r',bins=nbins)
     ax.grid()
