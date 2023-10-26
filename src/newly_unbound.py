@@ -48,9 +48,7 @@ if __name__ == "__main__":
     ph_data = dr.phantom_evdata(path_dumpfiles + '/separation_vs_time.ev',pheaders=False)
     fig, ax = plt.subplots()
     ax.plot(ph_data['time']*yr, np.log10(ph_data['sep. 1'])) 
-    sns.histplot(x=time_newly_unb,y=logR_newly_unb, ax=ax,color='r')
+    nbins = min([int(len(dump_list)/2),1000])
+    sns.histplot(x=time_newly_unb,y=logR_newly_unb, ax=ax,color='r',bins=nbins)
     ax.grid()
-    #H, yedges, xedges = np.histogram2d(logR_newly_unb,time_newly_unb,bins=200)
-    #plt.pcolormesh(xedges, yedges, H+1, cmap='Reds')
-    plt.show()
-
+    save_figure(path_dumpfiles + '/newly_unb.pdf')
