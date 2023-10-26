@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
     if len(sys.argv) > 2:
         if sys.argv[1][0] != '-':
-            path_dumpfiles = sys.argv[1]
+            path_dumpfiles = sys.argv[1] + '/'
         if path_save == None:
             path_save = path_dumpfiles
     dump_list = read_dumpfiles(path=path_dumpfiles,evy_files=evy_file)
