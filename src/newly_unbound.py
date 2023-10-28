@@ -16,6 +16,7 @@ from utils.pformat import save_figure, plot_format
 from energies import potential_parts, kinetic_parts
 from tqdm import tqdm  
 from cli_args_system import Args
+from matplotlib.ticker import ScalarFormatter
 
 def unbound_mech_kipp(dumpfile_list):
     time, R = np.array([]), np.array([])
@@ -41,9 +42,12 @@ if __name__ == "__main__":
     yr = constants.yr
     erg = constants.ener
     args = Args(convert_numbers=True)
+
+    #List of flags
     evy_file = args.flag_str('evy','evy_file')
     path_save = args.flag_str('s','save')
 
+    #Define path of dumpfiles and for plot/data saving
     path_dumpfiles = './data/CE_example/'   
     if len(sys.argv) > 1:
         if sys.argv[1][0] != '-':
@@ -51,18 +55,30 @@ if __name__ == "__main__":
     if path_save == None:
         path_save = path_dumpfiles
 
+    #Generate list of dumpfiles 
     dump_list = read_dumpfiles(path=path_dumpfiles,evy_files=evy_file)
     time_newly_unb, logR_newly_unb, weight = unbound_mech_kipp(dump_list)
 
+    #Generate data for histogram 
     write_hist2D_data(time_newly_unb, logR_newly_unb, 'time', 'logR', weight,pathfile=path_save)
     ph_data = dr.phantom_evdata(path_dumpfiles + '/separation_vs_time.ev',pheaders=False)
     
-    fig, ax = plt.subplots()
+    #Plot declaration  
+    ax = plt.gca()
     ax.plot(ph_data['time']*yr, np.log10(ph_data['sep. 1'])) 
+   
+    #Histogram format   
     nbins = min([int(len(dump_list)/1.05),500])
-    
-    
-    kipp_unb = sns.histplot(x=time_newly_unb, y=logR_newly_unb, ax=ax,color='r', weights=weight, bins=nbins, cbar=True)
+    kipp_unb = sns.histplot(x=time_newly_unb, y=logR_newly_unb, ax=ax,color='r', weights=weight, 
+                            bins=nbins, cbar=True, cbar_kws=dict(shrink=.90))
 
+    #Colorbar format
+    formatter = ScalarFormatter(useMathText=True)
+    formatter.set_powerlimits((-7, -2)) 
+    kipp_unb.collections[0].colorbar.ax.yaxis.set_major_formatter(formatter)
+    kipp_unb.collections[0].colorbar.set_label('Mass [M$_{\odot}$]', fontsize=18)
+
+    #Labels' format
     plot_format('time [yr]', 'R$_{\odot}$', leg=False)
-    save_figure(path_dumpfiles + 'newly_unb.pdf')
+    
+    plt.show()
