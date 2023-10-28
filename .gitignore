@@ -8,3 +8,4 @@ docs/.obsidian/*.json
 .obsidian/*.json
 Untitled.canvas
 docs/Gemfile
+external/*
