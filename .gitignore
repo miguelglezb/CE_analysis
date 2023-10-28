@@ -1,4 +1,4 @@
-data/CE_example/binary_0*
+data/CE_example/*
 figs/*
 wget-log*
 src/__pycache__/separation.cpython-310.pyc
