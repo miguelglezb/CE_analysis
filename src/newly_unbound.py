@@ -19,7 +19,22 @@ from cli_args_system import Args
 from matplotlib.ticker import ScalarFormatter
 
 def unbound_mech_kipp(dumpfile_list):
-    time, R = np.array([]), np.array([])
+    '''
+    Analyses the list of dumpfile to identify the time and radial
+    position of the newly unbound particles, using the mechanical criterion 
+    (kin + pot > 0) 
+        
+    Parameters
+    ----------
+    files_sufix : list of strings
+        Prefix of the dumpfiles  
+        
+    Returns
+    -------
+    Two lists of floats and one float 
+    '''
+    
+    time, R = [], []
     dict_ubn = {}
     nloops1 = len(dumpfile_list)
     for dump,i in zip(reversed(dumpfile_list),tqdm(range(nloops1))):
@@ -33,8 +48,8 @@ def unbound_mech_kipp(dumpfile_list):
     weight = sdf.params['mass']
     for npart,i in zip(dict_ubn,tqdm(range(nloops2))):
         tR = dict_ubn[npart]
-        time = np.append(time, tR[0])
-        R = np.append(R, tR[1])   
+        time.append(tR[0])
+        R.append(tR[1])
     return time, np.log10(R), weight
 
 
@@ -46,6 +61,12 @@ if __name__ == "__main__":
     #List of flags
     evy_file = args.flag_str('evy','evy_file')
     path_save = args.flag_str('s','save')
+    plot_title = args.flag_str('t','title')
+    xrange = args.flags_content('xrange')
+    yrange = args.flags_content('yrange')
+    dfiles_prefix = args.flags_content('dump')
+    xrange_list = xrange.flags()
+    yrange_list = yrange.flags()
 
     #Define path of dumpfiles and for plot/data saving
     path_dumpfiles = './data/CE_example/'   
@@ -56,9 +77,14 @@ if __name__ == "__main__":
         path_save = path_dumpfiles
 
     #Generate list of dumpfiles 
-    dump_list = read_dumpfiles(path=path_dumpfiles,evy_files=evy_file)
-    time_newly_unb, logR_newly_unb, weight = unbound_mech_kipp(dump_list)
+    try:
+        dump_list = read_dumpfiles(files_prefix=dfiles_prefix+'_' ,path=path_dumpfiles,
+                                   evy_files=evy_file)
+    except:
+        dump_list = read_dumpfiles(path=path_dumpfiles,evy_files=evy_file)
 
+
+    time_newly_unb, logR_newly_unb, weight = unbound_mech_kipp(dump_list)
     #Generate data for histogram 
     write_hist2D_data(time_newly_unb, logR_newly_unb, 'time', 'logR', weight,pathfile=path_save)
     ph_data = dr.phantom_evdata(path_dumpfiles + '/separation_vs_time.ev',pheaders=False)
@@ -78,7 +104,23 @@ if __name__ == "__main__":
     kipp_unb.collections[0].colorbar.ax.yaxis.set_major_formatter(formatter)
     kipp_unb.collections[0].colorbar.set_label('Mass [M$_{\odot}$]', fontsize=18)
 
-    #Labels' format
+    #Labels' format/limits
     plot_format('time [yr]', 'R$_{\odot}$', leg=False)
-    
-    plt.show()
+
+    #Uses specific limits, if they were declared with -xrange, -yrange flags
+    try:
+        plt.xlim([xrange_list[0], xrange_list[1]])
+    except:
+        pass
+
+    try:
+        plt.ylim([yrange_list[0], yrange_list[1]])
+    except:
+        pass
+
+    try:
+        plt.title(plot_title)
+    except:
+        pass
+    save_figure(path_save+'newly_unb.pdf',top=0.9)
+    #plt.show()
