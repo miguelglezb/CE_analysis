@@ -49,9 +49,9 @@ def plot_format(xlab,ylab,leg=True,grd=True,xlsize=20,ylsize=20,lgdsize=20,tksiz
     if leg==True:
         plt.legend(fontsize=lgdsize)
 
-def save_figure(name='./',t=0.985,b=0.125,l=0.25,r=0.992,h=0.2,w=0.2):
+def save_figure(name='./',top=0.985, bottom=0.125, left=0.25, right=0.992, hspace=0.2, wspace=0.2):
     path = name
-    plt.subplots_adjust(top=0.985, bottom=0.125, left=0.25, right=0.992, hspace=0.2, wspace=0.2)
+    plt.subplots_adjust(left, bottom, right, top, wspace, hspace)
     plt.savefig(path)
     plt.close()
     os.system('pdfcrop ' + path + ' ' + path)
