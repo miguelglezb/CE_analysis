@@ -4,7 +4,7 @@
 import os
 from pandas import unique
 
-def read_dumpfiles(files_sufix='binary_', path='./',evy_files=-1):
+def read_dumpfiles(files_prefix='binary_', path='./',evy_files=-1):
     '''
     Creates a list of the dumpfiles that will be used in the analysis.
         
@@ -24,7 +24,7 @@ def read_dumpfiles(files_sufix='binary_', path='./',evy_files=-1):
     List of strings (dumpfile names, including path)
 
     '''
-    os.system('ls ' + path + files_sufix + '* > listfiles.txt')
+    os.system('ls ' + path + files_prefix + '* > listfiles.txt')
     openlist = open('listfiles.txt')
     list_dumpfiles = openlist.read().splitlines() 
     list_dumpfiles = [namefile.rstrip('.divv') for namefile in list_dumpfiles]
