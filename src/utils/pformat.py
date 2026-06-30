@@ -56,8 +56,17 @@ def plot_format(xlab,ylab,leg=True,grd=True,xlsize=20,ylsize=20,lgdsize=20,tksiz
         plt.legend(fontsize=lgdsize)
 
 def save_figure(name='./',top=0.985, bottom=0.125, left=0.25, right=0.992, hspace=0.2, wspace=0.2):
+    pdfcropFound=shutil.which("pdfcrop") is not None
+    if(not pdfcropFound):
+        print("pdfcrop not found on the system's PATH environment variable, cropping margins using inbuilt matplotlib cropping instead")
+        
     path = name
     plt.subplots_adjust(left, bottom, right, top, wspace, hspace)
-    plt.savefig(path)
-    plt.close()
-    os.system('pdfcrop ' + path + ' ' + path)
+    
+    if(pdfcropFound):
+        plt.savefig(path)
+        plt.close()
+        os.system('pdfcrop ' + path + ' ' + path)
+    else:
+        plt.savefig(path, bbox_inches="tight")    
+        plt.close()
