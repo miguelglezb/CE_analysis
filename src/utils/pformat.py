@@ -5,12 +5,18 @@ import matplotlib.pyplot as plt
 from matplotlib import rc
 from matplotlib import rcParams
 import os
+import shutil
 
 scale = 1.5
 rc('font',**{'family':'Times New Roman'})
-rc('text', usetex=True)
 rcParams["figure.figsize"] = [6.4*scale, 4.8*scale]
 
+if(shutil.which("tex") is None):
+    rc('text', usetex=False)
+    print("TeX is not installed on this system, using matplotlib's preinstalled \"mathtext\" instead")
+else:
+    rc('text', usetex=True)
+    
 
 def plot_format(xlab,ylab,leg=True,grd=True,xlsize=20,ylsize=20,lgdsize=20,tksize=20):
     '''
