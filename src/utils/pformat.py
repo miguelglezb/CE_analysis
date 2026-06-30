@@ -13,7 +13,7 @@ rcParams["figure.figsize"] = [6.4*scale, 4.8*scale]
 
 if(shutil.which("tex") is None):
     rc('text', usetex=False)
-    print("TeX is not installed on this system, using matplotlib's preinstalled \"mathtext\" instead")
+    print("A usable TeX installation has not been found on this system's PATH environment variable, using matplotlib's preinstalled \"mathtext\" instead")
 else:
     rc('text', usetex=True)
     
