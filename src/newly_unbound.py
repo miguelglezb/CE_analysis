@@ -102,10 +102,10 @@ if __name__ == "__main__":
     formatter = ScalarFormatter(useMathText=True)
     formatter.set_powerlimits((-7, -2)) 
     kipp_unb.collections[0].colorbar.ax.yaxis.set_major_formatter(formatter)
-    kipp_unb.collections[0].colorbar.set_label('Mass [M$_{\odot}$]', fontsize=18)
+    kipp_unb.collections[0].colorbar.set_label(r'Mass [M$_{\odot}$]', fontsize=18)
 
     #Labels' format/limits
-    plot_format('time [yr]', 'R$_{\odot}$', leg=False)
+    plot_format('time [yr]', r'R$_{\odot}$', leg=False)
 
     #Uses specific limits, if they were declared with -xrange, -yrange flags
     try:

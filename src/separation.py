@@ -55,6 +55,6 @@ if __name__ == "__main__":
     dump_list = read_dumpfiles(path=path_dumpfiles)
     time, x_sep, y_sep, z_sep, r_sep = sep_t(dump_list,progress=True)
     plt.plot(time*yr,r_sep)
-    plot_format('time [yr]', 'Orbital separation [$R_{\odot}$]',leg=False)
+    plot_format('time [yr]', r'Orbital separation [$R_{\odot}$]',leg=False)
     stf.make_fig_dir(path_save)
     save_figure(path_save + 'figs/separation.pdf')
