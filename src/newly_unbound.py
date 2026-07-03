@@ -105,7 +105,7 @@ if __name__ == "__main__":
     kipp_unb.collections[0].colorbar.set_label(r'Mass [M$_{\odot}$]', fontsize=18)
 
     #Labels' format/limits
-    plot_format('time [yr]', r'R$_{\odot}$', leg=False)
+    plot_format('time [yr]', r'log$_{10}$ R$_{\odot}$', leg=False)
 
     #Uses specific limits, if they were declared with -xrange, -yrange flags
     try:
