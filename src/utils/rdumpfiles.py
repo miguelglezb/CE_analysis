@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-from pandas import unique
 
 def read_dumpfiles(files_prefix='binary_', path='./',evy_files=-1):
     '''
@@ -28,7 +27,8 @@ def read_dumpfiles(files_prefix='binary_', path='./',evy_files=-1):
     openlist = open('listfiles.txt')
     list_dumpfiles = openlist.read().splitlines() 
     list_dumpfiles = [namefile.rstrip('.divv') for namefile in list_dumpfiles]
-    list_dumpfiles = list(unique(list_dumpfiles))
+    list_dumpfiles = list(set(list_dumpfiles))
+    list_dumpfiles.sort()
     openlist.close()
     os.system('rm listfiles.txt')          
     if (evy_files == -1) or (evy_files ==  None):
