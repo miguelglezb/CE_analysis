@@ -91,7 +91,11 @@ if __name__ == "__main__":
     
     #Plot declaration  
     ax = plt.gca()
-    ax.plot(ph_data['time']*yr, np.log10(ph_data['sep. 1'])) 
+    
+    #Finds the total separation columns in the separation .ev file and plots them.
+    for columnName in ph_data.keys():
+        if(columnName[0:5] == "sep. "):
+            ax.plot(ph_data['time']*yr, np.log10(ph_data[columnName])) 
    
     #Histogram format   
     nbins = min([int(len(dump_list)/1.05),500])
